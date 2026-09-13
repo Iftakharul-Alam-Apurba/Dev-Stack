@@ -49,23 +49,71 @@ _Add a few screenshots here — the homepage, the technology grid, and "Your Sta
 
 A few questions about the ideas behind this project, answered in my own words.
 
-**1. What is JSX, and why is it used in React?**
-> _Write your answer here._
+### 1. What is JSX, and why is it used in React?
 
-**2. What is the difference between props and state?**
-> _Write your answer here._
+JSX stands for JavaScript XML. It allows us to write HTML-like syntax inside JavaScript or TypeScript. React uses JSX to describe what the UI should look like. It makes components easier to read and understand because the UI structure and logic can be written together.
 
-**3. What does the `useState` hook do, and where did you use it in this project?**
-> _Write your answer here._
+### 2. What is the difference between props and state?
 
+Props are used to pass data from a parent component to a child component. Props are read-only and should not be changed by the child.
+
+State is data that belongs to a component and can change over time. When state changes, React re-renders the component and updates the UI.
+
+In this project, I use props to pass technologies and state-related functions between components, while `selectedTechnologies` is stored as state.
+
+### 3. What does the `useState` hook do, and where did you use it in this project?
+
+The `useState` hook allows a functional component to store and update data that can change over time.
+
+I used `useState` in `App.tsx` to store the technologies promise and in `TechnologySection.tsx` to store the selected technologies.
+
+For example:
+
+
+const [selectedTechnologies, setSelectedTechnologies] =
+  useState<ITechnology[]>([]);
 **4. What does the `useEffect` hook do, and why did you need it to load the JSON data?**
-> _Write your answer here. (Note: this project currently loads data with `use()` + Suspense rather than `useEffect` — see the chat for how to reconcile that before answering.)_
+The useEffect hook is used to perform side effects in a React component, such as fetching data from an API, updating the document title, or interacting with external systems.
 
+For example, useEffect can be used to fetch JSON data when a component loads.
+
+In this project, I did not use useEffect for loading the JSON data. Instead, I used React's use() hook together with Suspense to read the promise returned by the fetch function.
 **5. Why does every item in a `.map()` list need a unique `key` prop?**
-> _Write your answer here._
+React uses the key prop to identify individual items in a list. It helps React determine which items were added, removed, or changed when the list is updated.
 
+In this project, I use the technology ID as the key:
+
+{technologies.map((technology) => (
+  <TechnologyCard
+    key={technology.id}
+    technology={technology}
+  />
+))}
+
+The ID is unique for each technology, so it is a suitable key.
 **6. What is conditional rendering? Show one place you used it.**
-> _Write your answer here._
+Conditional rendering means displaying different UI depending on a condition.
 
+I used conditional rendering in the YourStack component. When no technologies are selected, an empty-state message is displayed. Otherwise, the selected technologies are shown.
+
+For example:
+
+{count === 0 ? (
+  <div>
+    Your stack is empty.
+  </div>
+) : (
+  <div>
+    {technologies.map((tech) => (
+      // selected technologies
+    ))}
+  </div>
+)}
 **7. How do you pass data from a parent component to a child component, and how does a child send something back to the parent?**
-> _Write your answer here._
+A parent component can pass data to a child component using props.
+
+A child component can communicate back to the parent by receiving a function through props and calling that function.
+
+In this project, TechnologySection stores the selectedTechnologies state and passes it to TechnologyCard and YourStack.
+
+It also passes setSelectedTechnologies to the child components. When a technology is added or removed, the child calls this function to update the parent's state.
