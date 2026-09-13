@@ -61,13 +61,15 @@ In this project, I use props to pass technologies and state-related functions be
 
 The `useState` hook allows a functional component to store and update data that can change over time.
 
-I used `useState` in `App.tsx` to store the technologies promise and in `TechnologySection.tsx` to store the selected technologies.
+I used `useState` in `TechnologySection.tsx` to store the selected technologies. When a technology is added or removed, the state is updated and React re-renders the UI.
 
 For example:
 
-
 const [selectedTechnologies, setSelectedTechnologies] =
   useState<ITechnology[]>([]);
+
+Here, `selectedTechnologies` stores the currently selected technologies, while `setSelectedTechnologies` is used to update the state.
+
 **4. What does the `useEffect` hook do, and why did you need it to load the JSON data?**
 The useEffect hook is used to perform side effects in a React component, such as fetching data from an API, updating the document title, or interacting with external systems.
 
