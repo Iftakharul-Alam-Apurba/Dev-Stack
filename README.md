@@ -41,10 +41,6 @@ npm run dev
 npm run build
 ```
 
-## 📸 Screenshots
-
-_Add a few screenshots here — the homepage, the technology grid, and "Your Stack" with items selected all work well._
-
 ## 💡 React Concepts
 
 A few questions about the ideas behind this project, answered in my own words.
